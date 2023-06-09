@@ -1,0 +1,41 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "no-loops", // adding eslint-plugin-no-loops plugin
+    "prettier"
+  ],
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never", // "import/extensions": "off" issue fix
+        "tsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": ["off"], // TODO: need to resolve it later,
+    "comma-dangle": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {} // this loads <rootdir>/tsconfig.json to eslint,
+      // // "import/no-unresolved": "off", issue fix, need to install eslint-import-resolver-typescript
+    }
+  }
+}

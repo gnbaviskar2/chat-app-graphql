@@ -1,0 +1,12 @@
+**/node_modules
+node_modules
+
+**/build
+build
+
+# ignore test converage
+coverage
+
+
+# logs skip
+*logs.txt
