@@ -20,14 +20,14 @@ const appMethods = {
   },
 };
 
-const init = (): Application => {
+const appInit = (): Application => {
   // TODO: logRocket
   const chatApp = express();
   // intiate middlewares
   appMethods
     .addApolloServer(chatApp)
     .then(() => {
-      console.log('Apollo server added successfully');
+      console.log('Apollo server attached successfully');
     })
     .catch((e: unknown) => {
       console.log(`Could not add apollo server: ${e}`);
@@ -35,4 +35,5 @@ const init = (): Application => {
     });
   return chatApp;
 };
-export default init;
+
+export default appInit;

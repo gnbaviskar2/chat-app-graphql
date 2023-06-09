@@ -12,8 +12,8 @@ const serverMethods = {
   },
 };
 
-const startServer = (server: Application): void => {
+const serverInit = (server: Application): void => {
   serverMethods.listen(server);
 };
 
-export default startServer;
+export default serverInit;

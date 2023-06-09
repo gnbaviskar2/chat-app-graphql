@@ -7,6 +7,8 @@ build
 # ignore test converage
 coverage
 
+# ignore env
+.env*
 
 # logs skip
 *logs.txt
