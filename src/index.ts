@@ -1,14 +1,14 @@
 import { Application } from 'express';
-import chatApp from './app';
-import startServer from './server';
+import init from './app';
+import serverMethods from './server';
 
 const beginMethods = {
   startChatServer: (): void => {
     // create app instance
-    const server: Application = new chatApp().init();
+    const server: Application = init();
 
     // start listening server
-    startServer(server);
+    serverMethods(server);
   },
 };
 
