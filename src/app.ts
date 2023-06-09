@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express/dist';
-import { Query } from './graphql/queries';
+// import { Query } from './graphql/queries';
 import typeDefs from './schema';
 
 // express app configurations goes here
@@ -9,9 +9,9 @@ const appMethods = {
   addApolloServer: async (app: Application): Promise<void> => {
     const apolloServer = new ApolloServer({
       typeDefs,
-      resolvers: {
-        Query,
-      },
+      // resolvers: {
+      //   Query,
+      // },
     });
     await apolloServer.start();
     apolloServer.applyMiddleware({
