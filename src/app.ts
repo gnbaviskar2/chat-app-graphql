@@ -10,6 +10,7 @@ const appMethods = {
     await apolloServer.start();
     apolloServer.applyMiddleware({
       app,
+      path: '/graphql',
     });
   },
 };
