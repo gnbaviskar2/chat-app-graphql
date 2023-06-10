@@ -1,5 +1,7 @@
 const userQuery = {
-  hello: () => 'hello world!',
+  Query: {
+    hello: () => 'hello world!',
+  },
 };
 
 export default userQuery;

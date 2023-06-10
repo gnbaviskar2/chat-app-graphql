@@ -1,18 +1,12 @@
 import express, { Application } from 'express';
-import { ApolloServer } from 'apollo-server-express/dist';
-// import { Query } from './graphql/queries';
-import typeDefs from './schema';
+import { ApolloServer } from 'apollo-server-express';
+import apolloServerConfigs from './graphql';
 
 // express app configurations goes here
 const appMethods = {
-  // declare all middlewares
-  addApolloServer: async (app: Application): Promise<void> => {
-    const apolloServer = new ApolloServer({
-      typeDefs,
-      // resolvers: {
-      //   Query,
-      // },
-    });
+  // define all middlewares
+  attachApolloServer: async (app: Application): Promise<void> => {
+    const apolloServer = new ApolloServer(apolloServerConfigs);
     await apolloServer.start();
     apolloServer.applyMiddleware({
       app,
@@ -25,7 +19,7 @@ const appInit = (): Application => {
   const chatApp = express();
   // intiate middlewares
   appMethods
-    .addApolloServer(chatApp)
+    .attachApolloServer(chatApp)
     .then(() => {
       console.log('Apollo server attached successfully');
     })
