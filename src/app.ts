@@ -1,6 +1,8 @@
-import express, { Application } from 'express';
+import express, { Application, Express } from 'express';
 import { ApolloServer } from 'apollo-server-express';
+import { Server, createServer } from 'http';
 import apolloServerConfigs from './graphql';
+// import { WebSocketServer } from 'ws';
 
 // express app configurations goes here
 const appMethods = {
@@ -15,12 +17,16 @@ const appMethods = {
   },
 };
 
-const appInit = (): Application => {
+const appInit = (): { messageApp: Express; httpServer: Server } => {
   // TODO: logRocket
-  const chatApp = express();
+
+  // initiate express app
+  const messageApp = express();
+  // create http server instance
+  const httpServer: Server = createServer(messageApp);
   // initiate middlewares
   appMethods
-    .attachApolloServer(chatApp)
+    .attachApolloServer(messageApp)
     .then(() => {
       console.log('Apollo server attached successfully');
     })
@@ -28,7 +34,10 @@ const appInit = (): Application => {
       console.log(`Could not add apollo server: ${e}`);
       process.exit(0);
     });
-  return chatApp;
+  return {
+    messageApp,
+    httpServer,
+  };
 };
 
 export default appInit;
