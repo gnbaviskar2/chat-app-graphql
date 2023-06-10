@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import userQueries from './user.query';
-// import chatQueries from './chat.query';
+import messageQueries from './message.query';
 
-const merged = merge(userQueries);
+const merged = merge(userQueries, messageQueries);
 
 export default merged;
