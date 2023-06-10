@@ -1,3 +1,5 @@
+// apollo web socket integration doc
+// https://www.apollographql.com/docs/apollo-server/v3/data/subscriptions
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import {
@@ -8,7 +10,6 @@ import { Server, createServer } from 'http';
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import schema from './graphql';
-// import { WebSocketServer } from 'ws';
 
 // express app configurations goes here
 const appMethods = {
