@@ -30,7 +30,9 @@
       }
     ],
     "import/no-extraneous-dependencies": ["off"], // TODO: need to resolve it later,
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "implicit-arrow-linebreak": "off",
+    "import/prefer-default-export": "warn"
   },
   "settings": {
     "import/resolver": {
