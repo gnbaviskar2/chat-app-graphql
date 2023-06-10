@@ -7,7 +7,7 @@ const userMutations = {
     userSignUp: (
       _parent: unknown,
       args: { userSignUpPayload: userSignUpData }
-    ): Promise<User> =>
+    ): Promise<User | null> =>
       userController.userSignUpController(args.userSignUpPayload),
   },
 };

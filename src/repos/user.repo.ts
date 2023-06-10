@@ -4,14 +4,7 @@ import prisma from '../database/prisma';
 
 const createUser = (userSignUpPayload: userSignUpData): Promise<User> =>
   prisma.user.create({
-    data: {
-      firstname: 'ghanshyam',
-      lastname: 'baviskar',
-      email: userSignUpPayload.email,
-      password: 'djfhdf',
-    },
+    data: userSignUpPayload,
   });
 
-export default {
-  createUser,
-};
+export { createUser };

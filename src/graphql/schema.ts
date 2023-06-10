@@ -9,7 +9,7 @@ const typeDefs = gql`
     createdAt: String
   }
 
-  input userSignInput {
+  input userSignUpInput {
     firstname: String
     lastname: String
     password: String
@@ -22,7 +22,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    userSignUp(userSignInput: userSignInput!): User
+    userSignUp(userSignUpPayload: userSignUpInput!): User
   }
 `;
 

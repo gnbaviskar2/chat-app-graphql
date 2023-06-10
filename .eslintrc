@@ -32,7 +32,9 @@
     "import/no-extraneous-dependencies": ["off"], // TODO: need to resolve it later,
     "comma-dangle": "off",
     "implicit-arrow-linebreak": "off",
-    "import/prefer-default-export": "warn"
+    "import/prefer-default-export": "warn",
+    // removing any errors as error type in catch block is always any
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "settings": {
     "import/resolver": {

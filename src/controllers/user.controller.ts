@@ -1,11 +1,21 @@
 import { User } from '@prisma/client';
+import { ApolloError } from 'apollo-server-core';
 import { userSignUpData } from '../interface';
-import { userRepo } from '../repos';
+import { userRepo } from '../repos/index';
+import {} from 'express';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const userSignUpController = async (userSignUpPayload: userSignUpData) => {
-  const user = await userRepo.default.createUser(userSignUpPayload);
-  return user;
+const userSignUpController = async (
+  userSignUpPayload: userSignUpData
+): Promise<User | null> => {
+  try {
+    const user = await userRepo.createUser(userSignUpPayload);
+    return user;
+  } catch (error: any) {
+    if (error.code) {
+      throw new ApolloError('Email already registered with us');
+    }
+    throw error;
+  }
 };
 
 export { userSignUpController };
