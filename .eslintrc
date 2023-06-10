@@ -36,7 +36,8 @@
     // removing any errors as error type in catch block is always any
     "@typescript-eslint/no-explicit-any": "off",
     "operator-linebreak": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "object-curly-newline": "off"
   },
   "settings": {
     "import/resolver": {

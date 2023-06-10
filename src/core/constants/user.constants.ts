@@ -7,6 +7,8 @@ const userErrorMessages = {
   passwordNotValid: 'Password not valid',
   passwordMin: 'Password needs at least 8 chars',
   passwordMax: 'Password can be at max 50 chars',
+  userNotFound: 'Wrong user email or password',
+  emailAlreadyRegistered: 'Email already registered',
 };
 
 export { userErrorMessages };

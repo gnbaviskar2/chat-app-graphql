@@ -14,4 +14,19 @@ const getUsers = (take: number, cursor: number): Promise<User[] | null> =>
       id: cursor,
     },
   });
-export { createUser, getUsers };
+
+const getUserByEmail = (email: string): Promise<User | null> =>
+  prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
+
+const getUserById = (id: number): Promise<User | null> =>
+  prisma.user.findFirst({
+    where: {
+      id,
+    },
+  });
+
+export { createUser, getUsers, getUserByEmail, getUserById };
