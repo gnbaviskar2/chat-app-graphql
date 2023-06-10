@@ -1,7 +1,5 @@
-import {
-  ApolloServerExpressConfig,
-  makeExecutableSchema,
-} from 'apollo-server-express';
+import { ApolloServerExpressConfig } from 'apollo-server-express';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import { merge } from 'lodash';
 import typeDefs from './schema';
 import queries from './queries';

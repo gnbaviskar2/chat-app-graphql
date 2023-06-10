@@ -18,7 +18,7 @@ const appMethods = {
 const appInit = (): Application => {
   // TODO: logRocket
   const chatApp = express();
-  // intiate middlewares
+  // initiate middlewares
   appMethods
     .attachApolloServer(chatApp)
     .then(() => {
