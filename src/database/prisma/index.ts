@@ -1,10 +1,6 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
-const prisma: PrismaClient<
-  Prisma.PrismaClientOptions,
-  never,
-  Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
-> = new PrismaClient({
+const prisma: PrismaClient = new PrismaClient({
   errorFormat: 'pretty',
   log: ['query', 'error', 'warn'],
 });

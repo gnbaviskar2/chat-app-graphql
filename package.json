@@ -22,6 +22,7 @@
     "dotenv": "^16.1.4",
     "express": "4.17.1",
     "graphql": "15.5.0",
+    "graphql-subscriptions": "^2.0.0",
     "graphql-ws": "^5.13.1",
     "joi": "^17.9.2",
     "lodash": "4.17.21",

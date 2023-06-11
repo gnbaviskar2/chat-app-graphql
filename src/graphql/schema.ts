@@ -50,6 +50,10 @@ const typeDefs = gql`
     userLogin(email: String!, password: String!): User
     createMessage(createMessagePayload: createMessageInput): Message!
   }
+
+  type Subscription {
+    messageCreated: Message
+  }
 `;
 
 export default typeDefs;
