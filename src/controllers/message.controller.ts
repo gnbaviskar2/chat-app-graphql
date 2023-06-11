@@ -1,7 +1,7 @@
 import { Message } from '@prisma/client';
 import { createMessageInput, getMessagesByUserIdInput } from '../interface';
 import { messageRepo } from '../repos';
-import pubsub from '../graphql/mutations/subscriptions';
+import pubsub from '../graphql/subscriptions/subscriptions';
 import { messageConstants } from '../core/constants';
 
 const createMessageController = async (
