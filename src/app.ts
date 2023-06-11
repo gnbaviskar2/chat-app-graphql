@@ -1,25 +1,68 @@
+// apollo web socket integration doc
+// https://www.apollographql.com/docs/apollo-server/v3/data/subscriptions
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import apolloServerConfigs from './graphql';
+import {
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageLocalDefault,
+} from 'apollo-server-core';
+import { Server, createServer } from 'http';
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
+import schema from './graphql';
 
 // express app configurations goes here
 const appMethods = {
   // define all middlewares
-  attachApolloServer: async (app: Application): Promise<void> => {
-    const apolloServer = new ApolloServer(apolloServerConfigs);
+  attachApolloServer: async (
+    messageApp: Application,
+    httpServer: Server
+  ): Promise<void> => {
+    // Create our WebSocket server using the HTTP server we just set up.
+    const wsServer = new WebSocketServer({
+      server: httpServer,
+      path: '/graphql',
+    });
+    // Save the returned server's info so we can shutdown this server later
+    const serverCleanup = useServer({ schema }, wsServer);
+    const apolloServer = new ApolloServer({
+      schema,
+      csrfPrevention: true,
+      cache: 'bounded',
+      plugins: [
+        // Proper shutdown for the HTTP server.
+        ApolloServerPluginDrainHttpServer({ httpServer }),
+
+        // Proper shutdown for the WebSocket server.
+        {
+          async serverWillStart() {
+            return {
+              async drainServer() {
+                await serverCleanup.dispose();
+              },
+            };
+          },
+        },
+        ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+      ],
+    });
     await apolloServer.start();
     apolloServer.applyMiddleware({
-      app,
+      app: messageApp,
     });
   },
 };
 
-const appInit = (): Application => {
+const appInit = (): { messageApp: Application; httpServer: Server } => {
   // TODO: logRocket
-  const chatApp = express();
-  // intiate middlewares
+
+  // initiate express app
+  const messageApp = express();
+  // create http server instance
+  const httpServer: Server = createServer(messageApp);
+  // initiate middlewares
   appMethods
-    .attachApolloServer(chatApp)
+    .attachApolloServer(messageApp, httpServer)
     .then(() => {
       console.log('Apollo server attached successfully');
     })
@@ -27,7 +70,10 @@ const appInit = (): Application => {
       console.log(`Could not add apollo server: ${e}`);
       process.exit(0);
     });
-  return chatApp;
+  return {
+    messageApp,
+    httpServer,
+  };
 };
 
 export default appInit;

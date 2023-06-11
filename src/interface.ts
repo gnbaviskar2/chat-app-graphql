@@ -10,4 +10,22 @@ interface userType extends userSignUpData {
   createdAt: string;
 }
 
-export { userSignUpData, userType };
+interface createMessageInput {
+  text: string;
+  receiverId: number;
+  senderId: number;
+}
+
+interface getMessagesByUserIdInput {
+  receiverId: number;
+  senderId: number;
+  take: number;
+  cursor?: number;
+}
+
+export {
+  userSignUpData,
+  userType,
+  createMessageInput,
+  getMessagesByUserIdInput,
+};

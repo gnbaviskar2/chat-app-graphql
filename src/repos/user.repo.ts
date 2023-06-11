@@ -7,4 +7,26 @@ const createUser = (userSignUpPayload: userSignUpData): Promise<User> =>
     data: userSignUpPayload,
   });
 
-export { createUser };
+const getUsers = (take: number, cursor: number): Promise<User[] | null> =>
+  prisma.user.findMany({
+    take,
+    cursor: {
+      id: cursor,
+    },
+  });
+
+const getUserByEmail = (email: string): Promise<User | null> =>
+  prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
+
+const getUserById = (id: number): Promise<User | null> =>
+  prisma.user.findFirst({
+    where: {
+      id,
+    },
+  });
+
+export { createUser, getUsers, getUserByEmail, getUserById };

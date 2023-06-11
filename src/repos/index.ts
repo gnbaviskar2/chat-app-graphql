@@ -1,3 +1,4 @@
 import * as userRepo from './user.repo';
+import * as messageRepo from './message.repo';
 
-export { userRepo };
+export { userRepo, messageRepo };
